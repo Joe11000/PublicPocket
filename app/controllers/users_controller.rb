@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	before_filter :set_headers
 
 	def new
-		render text: "It worked from #{params[:location]}" and return
+		render text: "It worked from #{params['location']}" and return
 	end
 
 	def options
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 end
 
 # var xhr = new XMLHttpRequest();
-# xhr.open("get", "http://pure-ravine-3133.herokuapp.com/users/new", true);
+# xhr.open("get", "http://cors-test-101.herokuapp.com/users/new", true);
 # xhr.onload = function(info){console.log(info)}
 # xhr.send({'location': "http://www.video.nhl.com"})
 
