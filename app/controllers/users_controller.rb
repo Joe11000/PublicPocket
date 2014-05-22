@@ -58,7 +58,6 @@ end
 
 # var data = new FormData();
 # data.append('location', window.location.toString())
-
 # var url = "http://localhost:3000/users";
 # var xhr = new XMLHttpRequest();
 # xhr.open("post", url, true);
