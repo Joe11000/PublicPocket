@@ -3,17 +3,17 @@ class UsersController < ApplicationController
 	after_filter :cors_set_access_control_headers if :options
 
 	def new
-		debugger
+		# debugger
 		render text: "one #{params}" and return
 	end
 
 	def options
-		debugger
+		# debugger
 		render text: "two #{params['location']}" and return
 	end
 
   def create
-		debugger
+		# debugger
 		render text: "You are on #{params['location']}" and return
 	end
 
@@ -56,6 +56,12 @@ end
 
 
 
+
+# THESE WORKS TO SEND THIS CONTROLLER STUFF
+
+
+# --------- Without jQuery -------------------------
+# ---- Running on Server Locally
 # var data = new FormData();
 # data.append('location', window.location.toString())
 # var url = "http://localhost:3000/users";
@@ -64,21 +70,26 @@ end
 # xhr.onload = function(info){console.log(info)}
 # xhr.send(data)
 
+# ---- Hosted on Heroku
+# var data = new FormData();
+# data.append('location', window.location.toString())
+# var url = "http://cors-test-101.herokuapp.com";
+# var xhr = new XMLHttpRequest();
+# xhr.open("post", url, true);
+# xhr.onload = function(info){console.log(info)}
+# xhr.send(data)
+# --------------------------------------------------
 
 
 
 
 
+# ----------- With jQuery -------------------------------------
 
 
 
 
-
-
-
-
-
-# THIS WORKS TO SEND THIS CONTROLLER STUFF
+# ---- Running on Server Locally
 # (function(){
 #   var newscript = document.createElement('script');
 #      newscript.type = 'text/javascript';
@@ -86,8 +97,6 @@ end
 #      newscript.src = 'http://code.jquery.com/jquery-latest.min.js';
 #   (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(newscript);
 # })();
-
-
 
 # here = window.location.toString()
 # a = $.ajax({
@@ -99,3 +108,28 @@ end
 #     withCredentials: true
 #   }
 # })
+
+
+# ---- Hosted on Heroku
+# (function(){
+#   var newscript = document.createElement('script');
+#      newscript.type = 'text/javascript';
+#      newscript.async = true;
+#      newscript.src = 'http://code.jquery.com/jquery-latest.min.js';
+#   (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(newscript);
+# })();
+
+# here = window.location.toString()
+# a = $.ajax({
+#   type: "post",
+#   url: "http://cors-test-101.herokuapp.com",
+#   data: {'location': here},
+#   crossDomain: true,
+#   xhrFields: {
+#     withCredentials: true
+#   }
+# })
+
+
+
+# --------------------------------------------------
