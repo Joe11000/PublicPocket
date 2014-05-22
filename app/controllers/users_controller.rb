@@ -69,15 +69,17 @@ end
 # xhr.open("post", url, true);
 # xhr.onload = function(info){console.log(info)}
 # xhr.send(data)
+# xhr.response
 
 # ---- Hosted on Heroku
 # var data = new FormData();
 # data.append('location', window.location.toString())
-# var url = "http://cors-test-101.herokuapp.com";
+# var url = "http://cors-test-101.herokuapp.com/users";
 # var xhr = new XMLHttpRequest();
 # xhr.open("post", url, true);
 # xhr.onload = function(info){console.log(info)}
 # xhr.send(data)
+# xhr.response
 # --------------------------------------------------
 
 
@@ -85,9 +87,6 @@ end
 
 
 # ----------- With jQuery -------------------------------------
-
-
-
 
 # ---- Running on Server Locally
 # (function(){
@@ -99,7 +98,7 @@ end
 # })();
 
 # here = window.location.toString()
-# a = $.ajax({
+# xhr = $.ajax({
 #   type: "post",
 #   url: "http://localhost:3000/users",
 #   data: {'location': here},
@@ -108,6 +107,7 @@ end
 #     withCredentials: true
 #   }
 # })
+# xhr.responseText
 
 
 # ---- Hosted on Heroku
@@ -119,16 +119,17 @@ end
 #   (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(newscript);
 # })();
 
-# here = window.location.toString()
-# a = $.ajax({
+# var here = window.location.toString()
+# xhr = $.ajax({
 #   type: "post",
-#   url: "http://cors-test-101.herokuapp.com",
+#   url: "http://cors-test-101.herokuapp.com/users/",
 #   data: {'location': here},
 #   crossDomain: true,
 #   xhrFields: {
 #     withCredentials: true
 #   }
 # })
+# xhr.responseText
 
 
 
