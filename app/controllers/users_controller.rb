@@ -2,7 +2,8 @@ class UsersController < ApplicationController
 	before_filter :set_headers
 
 	def new
-		render text: "It worked from #{params['location']}" and return
+
+		render text: params['location'] and return
 	end
 
 	def options
