@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title></title>
+  	<script src="jquery-1.10.2.js"></script>
+
+  	<!-- <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" /> -->
+    <script src="jquery-ui-1.10.4.min.js"></script>
+
+  	<link rel="stylesheet" type="text/css" href="publicpocket.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <button type="button" onclick="ajax()">Save Page</button>
+    </div>
+
+    <script type="text/javascript">
+      var element_1 = "<button type='button' onclick='ajax()'>Save Page</button>"
+      var element_2 = "<img src='ajax-loader.gif'>"
+
+      ajax = function()
+      {
+      	if($('.container > button').size() > 0)
+      	  $('button').replaceWith(element_2);
+      	else
+      		return;
+
+
+        link = "http://publicpocket.herokuapp.com/"
+        data = { 'url': document.URL, 'private': false }
+
+      	$.post(link, data, function(response){
+      		console.log(response)
+          $('.container > img').replaceWith(element_1)
+      	});
+      }
+    </script>
+  </body>
+</html>
+
+<!--
+http://www.ibhomefinder.com/images/ajax-loader.gif
+http://www.royalrentacar.com/images/Loading.gif
+http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_350.gif -->
