@@ -26,14 +26,21 @@
       	else
       		return;
 
+        var here = document.URL
+        xhr = $.ajax({
+          type: "post",
+          url: "http://cors-test-101.herokuapp.com/users/",
+          data: {'location': here},
+          crossDomain: true,
+          xhrFields: {
+            withCredentials: true
+          }
+        })
+          .done(function(){
+            console.log(arguments[0])
 
-        link = "http://publicpocket.herokuapp.com/"
-        data = { 'url': document.URL, 'private': false }
-
-      	$.post(link, data, function(response){
-      		console.log(response)
-          $('.container > img').replaceWith(element_1)
-      	});
+            $('.container > img').replaceWith(element_1)
+          });
       }
     </script>
   </body>
