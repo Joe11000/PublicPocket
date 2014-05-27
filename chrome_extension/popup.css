@@ -1,15 +1,19 @@
-button {
+body#Joe_Chrome_Extension_No_Touchie button {
   border: 1px solid black;
   border-radius: 5px;
-  background-color: lightblue;
+	background-color: lightblue;
 }
 
-body {
+body#Joe_Chrome_Extension_No_Touchie button.saved {
+  background-color: red;
+}
+
+body#Joe_Chrome_Extension_No_Touchie {
   width:100px;
   height:200px;
 }
 
-.container{
+body#Joe_Chrome_Extension_No_Touchie .container{
 	height:30px;
 	width:50px;
 }

@@ -1,0 +1,8 @@
+<ul>
+  <% @sites.each do |site|%>
+    <li>
+      <%= link_to "#{site.url}", site.url %>
+      <%= button_to :delete, site, method: :delete %>
+    </li>
+  <% end %>
+</ul>

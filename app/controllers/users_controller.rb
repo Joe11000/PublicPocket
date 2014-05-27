@@ -3,18 +3,16 @@ class UsersController < ApplicationController
 	after_filter :cors_set_access_control_headers if :options
 
 	def new
-		debugger
 		render text: "one #{params}" and return
 	end
 
 	def options
-		debugger
 		render text: "two #{params['location']}" and return
 	end
 
   def create
-		debugger
-		render text: "You are on #{params['location']}" and return
+    User.create(params[:location])
+		# render text: "You are on #{params['location']}" and return
 	end
 
   private

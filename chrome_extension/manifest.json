@@ -1,5 +1,4 @@
 {
-
   // Required
   "name": "PublicPocket",
   "version": "1.0.0",
@@ -15,20 +14,17 @@
 
   // Recommended
   "description": "put articles/videos in your pocket to view later",
-  // "default_locale": "en",
-  // "app":
-  // {
-  //   "launch": { "local_path": "popup.html" }
-  // },
 
+// Allow for Ajax requests to my site.
 "permissions": [
     "http://cors-test-101.herokuapp.com/*",
     "http://127.0.0.1:3000/*"
   ],
 
+
  "content_scripts": [
     {
-      "matches": ["http://*/*", "http://127.0.0.1:3000/*"],
+      "matches": ["http://*/*"], // Allow these files to be loaded on every web page
       "css": ["popup.css"],
       "js": ["popup.js", "jquery-1.10.2.js", "jquery-ui-1.10.4.min.js"]
     }
@@ -38,7 +34,6 @@
   {
     "96": "images/Button_96px.png"
   },
-
 
   "author": "Joe Noonan"
 }

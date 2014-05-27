@@ -9,25 +9,51 @@ var sendLocationViaAjax = function()
     return;
 
   var here = document.URL
-  var url = "http://cors-test-101.herokuapp.com/users/new" // var url = "http://localhost:3000/users";
+  var url = "http://localhost:3000/sites"; // var url = "http://cors-test-101.herokuapp.com/sites" //
   xhr = $.ajax({
-    type: "get",
+    type: "post",
     url: url,
     data: {'location': here},
     crossDomain: true,
     xhrFields: {
       withCredentials: true
     }
-  })
+  }, 'json')
     .done(function()
     {
       console.log(arguments[0])
       $('.container > img').replaceWith(element_1)
-            });
+    });
 }
+
+
+var checkIfPageAlreadySaved = function()
+{
+
+  var here = document.URL
+  var url = "http://localhost:3000/sites/has_url"; // var url = "http://cors-test-101.herokuapp.com/users" //
+  $.ajax({
+    type: "get",
+    url: url,
+    data: { 'location': here },
+    crossDomain: true,
+    xhrFields: { withCredentials: true }
+  })
+    .done(function()
+    {
+      console.log(arguments)
+      if(arguments[0] == 'true')
+        $('#Joe_Chrome_Extension_No_Touchie #submit button').addClass('saved');
+      else
+        $('#Joe_Chrome_Extension_No_Touchie #submit button').removeClass('saved');
+    })
+}
+
 
 $(function()
 {
+  // checkIfPageAlreadySaved();
+
   $('#submit').click(function(e)
   {
     sendLocationViaAjax();
