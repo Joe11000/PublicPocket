@@ -1,8 +1,10 @@
 class SitesController < ApplicationController
 	def create
-		debugger
-    s = Site.create(params[:location])
+		# debugger
+    s = Site.create(url: params[:location], secret: false)
+    size = User.first.sites.size
     User.first.sites << s
+    render json: !!(User.first.sites.size == size + 1) and return
 	end
 
 	def index

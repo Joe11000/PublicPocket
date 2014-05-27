@@ -42,7 +42,7 @@ var checkIfPageAlreadySaved = function()
     .done(function()
     {
       console.log(arguments)
-      if(arguments[0] == 'true')
+      if(arguments[0])
         $('#Joe_Chrome_Extension_No_Touchie #submit button').addClass('saved');
       else
         $('#Joe_Chrome_Extension_No_Touchie #submit button').removeClass('saved');
@@ -54,7 +54,12 @@ $(function()
 {
   // checkIfPageAlreadySaved();
 
-  $('#submit').click(function(e)
+  $('body#Joe_Chrome_Extension_No_Touchie #submit').click(function(e)
+  {
+    sendLocationViaAjax();
+  });
+
+    $('body#Joe_Chrome_Extension_No_Touchie a').click(function(e)
   {
     sendLocationViaAjax();
   });

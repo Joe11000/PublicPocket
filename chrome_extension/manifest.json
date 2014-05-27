@@ -18,7 +18,8 @@
 // Allow for Ajax requests to my site.
 "permissions": [
     "http://cors-test-101.herokuapp.com/*",
-    "http://127.0.0.1:3000/*"
+    "http://127.0.0.1:3000/*",
+    "tabs"
   ],
 
 

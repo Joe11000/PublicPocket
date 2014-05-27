@@ -58,7 +58,7 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+gem "debugger"
 group :production do
   gem 'rails_12factor'  # heroku deployment needs this
   gem 'thin'
@@ -68,7 +68,7 @@ end
 group :development do       # When Error in browser. Allows for better debugging in browser. Not in JS console.
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem "debugger"
+  # gem "debugger"
 end
 
 group :production, :test do
