@@ -9,7 +9,7 @@ var sendLocationViaAjax = function()
     return;
 
   var here = document.URL
-  var url = "http://localhost:3000/sites"; // var url = "http://cors-test-101.herokuapp.com/sites" //
+  var url = "http://cors-test-101.herokuapp.com/sites" // var url = "http://localhost:3000/sites"; //
   xhr = $.ajax({
     type: "post",
     url: url,
@@ -31,7 +31,7 @@ var checkIfPageAlreadySaved = function()
 {
 
   var here = document.URL
-  var url = "http://localhost:3000/sites/has_url"; // var url = "http://cors-test-101.herokuapp.com/users" //
+  var url = "http://cors-test-101.herokuapp.com/users" // var url = "http://localhost:3000/sites/has_url"; //
   $.ajax({
     type: "get",
     url: url,

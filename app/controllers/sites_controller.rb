@@ -22,7 +22,7 @@ class SitesController < ApplicationController
 	# end
 
 	def has_url
-		debugger
+		# debugger
     render json: !!Site.find_by_url(params[:location]) and return
 	end
 end

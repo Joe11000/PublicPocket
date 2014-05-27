@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def create
     User.create(params[:location])
-		# render text: "You are on #{params['location']}" and return
+		render text: "You are on #{params['location']}" and return
 	end
 
   private
