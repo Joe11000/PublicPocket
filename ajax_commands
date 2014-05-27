@@ -7,23 +7,25 @@
 
 	// ---- Running on Server Locally
 		var data = new FormData();
-		data.append('location', window.location.toString())
+		data.append('location', document.URL);
 		var url = "http://localhost:3000/users";
 		var xhr = new XMLHttpRequest();
 		xhr.open("post", url, true);
-		xhr.onload = function(info){console.log(info)}
-		xhr.send(data)
+		xhr.onload = function(info){console.log(info)};
+		xhr.send(data);
+
 		xhr.response
 	// -------------------------------
 
 	// ---- Hosted on Heroku
 		var data = new FormData();
-		data.append('location', window.location.toString())
+		data.append('location', document.URL);
 		var url = "http://cors-test-101.herokuapp.com/users";
 		var xhr = new XMLHttpRequest();
 		xhr.open("post", url, true);
-		xhr.onload = function(info){console.log(info)}
-		xhr.send(data)
+		xhr.onload = function(info){console.log(info)};
+		xhr.send(data);
+
 		xhr.response
 		// -------------------------------
 // --------------------------------------------------
@@ -41,7 +43,7 @@
 		  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(newscript);
 		})();
 
-		here = window.location.toString()
+		here = document.URL
 		xhr = $.ajax({
 		  type: "post",
 		  url: "http://localhost:3000/users",
@@ -50,7 +52,8 @@
 		  xhrFields: {
 		    withCredentials: true
 		  }
-		})
+		});
+
 		xhr.responseText
 	// -------------------------------
 
@@ -64,7 +67,7 @@
 		  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(newscript);
 		})();
 
-		var here = window.location.toString()
+		var here = document.URL
 		xhr = $.ajax({
 		  type: "post",
 		  url: "http://cors-test-101.herokuapp.com/users/",
@@ -73,7 +76,8 @@
 		  xhrFields: {
 		    withCredentials: true
 		  }
-		})
+		});
+
 		xhr.responseText
 	// -------------------------------
 // --------------------------------------------------

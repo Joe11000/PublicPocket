@@ -1,18 +1,44 @@
 {
+
+  // Required
   "name": "PublicPocket",
+  "version": "1.0.0",
+  "manifest_version": 2,
+
+  // Pick one
+  "browser_action":
+  {
+    "default_icon": { "19": "images/Button_19px.png" },
+    "default_popup": "popup.html",
+    "default_title": "Pocket Link"
+  },
+
+  // Recommended
   "description": "put articles/videos in your pocket to view later",
-  "version": "1",
-  "app": {
-    "launch": {
-      "local_path": "publicpocket.html"
+  // "default_locale": "en",
+  // "app":
+  // {
+  //   "launch": { "local_path": "popup.html" }
+  // },
+
+"permissions": [
+    "http://cors-test-101.herokuapp.com/*",
+    "http://127.0.0.1:3000/*"
+  ],
+
+ "content_scripts": [
+    {
+      "matches": ["http://*/*", "http://127.0.0.1:3000/*"],
+      "css": ["popup.css"],
+      "js": ["popup.js", "jquery-1.10.2.js", "jquery-ui-1.10.4.min.js"]
     }
+  ],
+
+  "icons":
+  {
+    "96": "images/Button_96px.png"
   },
-  "icons": {
-    "16": "pocket_16px.jpg",
-    "32": "pocket_32px.jpg"
-  },
-  "permissions": [
-    "unlimited_storage",
-    "notifications"
-  ]
+
+
+  "author": "Joe Noonan"
 }
