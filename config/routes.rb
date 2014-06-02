@@ -1,7 +1,7 @@
 CorsTest::Application.routes.draw do
 
 # resources :users, shallow: true do
-  get '/sites/has_url', to: 'sites#has_url'
+  get '/sites/has_url_saved', to: 'sites#has_url_saved'
   resources :sites
 # end
 

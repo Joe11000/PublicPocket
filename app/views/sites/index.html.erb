@@ -1,6 +1,6 @@
 <ul>
   <% @sites.each do |site|%>
-    <li>
+    <li class="site">
       <%= link_to "#{site.url}", site.url %>
       <%= button_to :delete, site, method: :delete %>
     </li>

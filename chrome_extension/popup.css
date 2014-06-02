@@ -1,10 +1,10 @@
-body#Joe_Chrome_Extension_No_Touchie button {
+body#Joe_Chrome_Extension_No_Touchie button#submit {
   border: 1px solid black;
   border-radius: 5px;
 	background-color: lightblue;
 }
 
-body#Joe_Chrome_Extension_No_Touchie button.saved {
+body#Joe_Chrome_Extension_No_Touchie button#submit.saved {
   background-color: red;
 }
 
@@ -16,4 +16,8 @@ body#Joe_Chrome_Extension_No_Touchie {
 body#Joe_Chrome_Extension_No_Touchie .container{
 	height:30px;
 	width:50px;
+}
+
+body#Joe_Chrome_Extension_No_Touchie .container li.site, body#Joe_Chrome_Extension_No_Touchie .container button {
+  display: inline-block;
 }
