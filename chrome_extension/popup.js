@@ -50,6 +50,7 @@ var saveLocationViaAjax = function(method, url)
 
   var here = document.URL
   // var url = "http://localhost:3000/sites"; // var url = "http://cors-test-101.herokuapp.com/sites" //
+
   xhr = $.ajax({
     type: method,
     url: url,
@@ -97,7 +98,11 @@ var deleteLocationViaAjax = function()
 var checkIfUrlAlreadySaved = function()
 {
   var here = document.URL
+<<<<<<< HEAD
   var url = "http://localhost:3000/sites/has_url_saved"; // var url = "http://cors-test-101.herokuapp.com/users" //
+=======
+  var url = "http://cors-test-101.herokuapp.com/users" // var url = "http://localhost:3000/sites/has_url"; //
+>>>>>>> df21e79e222b5cae0721ce9f34a76be031f1f0bf
   $.ajax({
     type: "get",
     url: url,
