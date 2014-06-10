@@ -13,11 +13,12 @@ body#Joe_Chrome_Extension_No_Touchie {
   height:200px;
 }
 
-body#Joe_Chrome_Extension_No_Touchie .container{
+body#Joe_Chrome_Extension_No_Touchie .container {
 	height:30px;
 	width:50px;
 }
 
-body#Joe_Chrome_Extension_No_Touchie .container li.site, body#Joe_Chrome_Extension_No_Touchie .container button {
+body#Joe_Chrome_Extension_No_Touchie li.site,
+body#Joe_Chrome_Extension_No_Touchie button {
   display: inline-block;
 }
