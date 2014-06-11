@@ -8,8 +8,8 @@ SAVED_URL_PAGE =
   {
     return "<div class='container saved'>" +
              ("<select name='post[person_id]'>" +
-               "<option value='Unread'" + (this.read_status == 'unread' ? " selected='selected'" : '') + ">Unread</option>" +
-               "<option value='Read'" + (this.read_status == 'read' ? " selected='selected'" : '') + ">Read</option>" +
+               "<option value='unread'" + (this.read_status == 'unread' ? " selected='selected'" : '') + ">Unread</option>" +
+               "<option value='read'" + (this.read_status == 'read' ? " selected='selected'" : '') + ">Read</option>" +
              "</select>") +
              "<b>" +
              GO_TO_SITE_LINK +
@@ -22,16 +22,17 @@ SAVED_URL_PAGE =
     $('body#Joe_Chrome_Extension_No_Touchie button#delete').click(function()
     {
       console.log("#22")
-      deleteLocationViaAjax('delete', "http://localhost:3000/sites/1");
+      deleteLocationViaAjax(); //'delete', "http://localhost:3000/sites/1");
     })
 
-    var url = "http://localhost:3000/sites/"
+    var url = "http://localhost:3000/sites/1/update"
+    var here = document.URL
     $('body#Joe_Chrome_Extension_No_Touchie select').change(function(e){
       e.preventDefault();
       xhr = $.ajax({
-        type: "put",
+        type: "post",
         url: url,
-        data: {select_value: $("body#Joe_Chrome_Extension_No_Touchie  :selected").val(), 'location': here},
+        data: {select_value: $("body#Joe_Chrome_Extension_No_Touchie  :selected").val(), 'location': here },
         crossDomain: true,
         xhrFields: {
           withCredentials: true
@@ -96,6 +97,11 @@ var saveLocationViaAjax = function(method, url, callback)
       $('.container > img').replaceWith(UNSAVED_URL_PAGE.SAVE_BUTTON)
       UNSAVED_URL_PAGE.bindEvents();
       $('body#Joe_Chrome_Extension_No_Touchie .container button#save').click()
+    })
+    .fail(function(response_val){
+      console.log('This should never fail' )
+      console.log(response_val)
+      checkIfUrlAlreadySaved()
     });
 }
 
@@ -121,24 +127,27 @@ var deleteLocationViaAjax = function(callback)
       withCredentials: true
     }
   }, 'text')
-    .success(function(response_val)
-    {
-      $("body#Joe_Chrome_Extension_No_Touchie #loading_gif").replaceWith(UNSAVED_URL_PAGE.LOADING_GIF)
+    // .success(function(response_val)
+    // {
+    //   $("body#Joe_Chrome_Extension_No_Touchie #loading_gif").replaceWith(UNSAVED_URL_PAGE.LOADING_GIF)
 
-      console.log('if this throwback ever works then throw a fucking party')
-      if(response_val == 'deleted sucessfully')
-      {
-        console.log(response_val + " ,,,, +++ Delete Location Via Ajax Callback Function")
-        UNSAVED_URL_PAGE.create()
-        UNSAVED_URL_PAGE.bindEvents()
-      }
-      else
-        console.log(response_val + " ,,,, --- Delete Location Via Ajax Callback Function")
+    //   console.log('if this throwback ever works then throw a fucking party')
+    //   if(response_val == 'sucessful delete')
+    //   {
+    //     console.log(response_val + " ,,,, +++ Delete Location Via Ajax Callback Function")
+    //     UNSAVED_URL_PAGE.create()
+    //     UNSAVED_URL_PAGE.bindEvents()
+    //   }
+    //   else
+    //     console.log(response_val + " ,,,, --- Delete Location Via Ajax Callback Function")
+    // })
+    // .done(function(response_val){
+    //   console.log('delete method, done callback worked')
+    //   $("body#Joe_Chrome_Extension_No_Touchie #loading_gif").replaceWith(UNSAVED_URL_PAGE.LOADING_GIF)
+    // })
+    .fail(function(response_val){
+      checkIfUrlAlreadySaved()
     })
-    .done(function(response_val){
-      console.log('delete method, done callback worked')
-      $("body#Joe_Chrome_Extension_No_Touchie #loading_gif").replaceWith(UNSAVED_URL_PAGE.LOADING_GIF)
-    });
 }
 
 var checkIfUrlAlreadySaved = function()
@@ -164,13 +173,15 @@ var checkIfUrlAlreadySaved = function()
                           SAVED_URL_PAGE.read_status = "read";
                         else
                           SAVED_URL_PAGE.read_status = "unread";
-                        str = "#Joe_Chrome_Extension_No_Touchie .container"
 
+                        str = "#Joe_Chrome_Extension_No_Touchie .container"
                         $(str).replaceWith(SAVED_URL_PAGE.create());
                         SAVED_URL_PAGE.bindEvents();
                         break;
 
-        case 'not_saved': UNSAVED_URL_PAGE.bindEvents();  // $('.container[class="saved"]').replaceWith(UNSAVED_URL_PAGE.create())
+        case 'not_saved': str = "#Joe_Chrome_Extension_No_Touchie .container"
+                          $(str).replaceWith(UNSAVED_URL_PAGE.create());
+                          UNSAVED_URL_PAGE.bindEvents();  // $('.container[class="saved"]').replaceWith(UNSAVED_URL_PAGE.create())
                           break;
         default: console.log( "Error. Url must be either 'unread', 'read', or 'not_saved'. Dont delete Message")
       }
