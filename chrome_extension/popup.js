@@ -1,51 +1,15 @@
 var GO_TO_SITE_LINK = "<a href='http://localhost:3000/sites/'>Go To Site</a>";
 
-var current_url;
-
-// sendAjax = function(method, url, data, return_type, callbackFunction)
-// { // (method='post', url='', data={}, return_type='text', callbackFunction={})
-//   if(method.match(/post/i))
-//   {
-//     xhr = $.ajax({
-//       type: method,
-//       url: url,
-//       data: {'location': current_url},
-//       crossDomain: true,
-//       xhrFields: { withCredentials: true }
-//       },return_type)
-//       .always(function(response_val){
-//         callbackFunction()
-//       })
-
-//   }
-//   else if (method.match(/get/i))
-//   {
-//     var data_encoded_url = "?" + $.param(data);
-
-//     xhr = $.ajax({
-//       type: method,
-//       url: data_encoded_url,
-//       crossDomain: true,
-//       xhrFields: { withCredentials: true }
-//     }, return_type)
-//     .always(function(response_val){
-//       callbackFunction()
-//     });
-//   }
-//   else
-//   {}
-// }
-
-determineCurrentUrlTestLocal = function()
+current_url = function(local)
 {
-  current_url = document.Url;
-}
-
-determineCurrentUrl = function()
-{
-  chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-    document.current_url = tabs[0].url;
-  });
+  if(local)
+    return document.URL
+  else
+    var c;
+    chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+      c = tabs[0].url;
+    });
+    return c;
 }
 
 SAVED_URL_PAGE =
@@ -165,25 +129,6 @@ var deleteLocationViaAjax = function(callback)
       withCredentials: true
     }
   }, 'text')
-    // .success(function(response_val)
-    // {
-    //   $("body#Joe_Chrome_Extension_No_Touchie #loading_gif").replaceWith(UNSAVED_URL_PAGE.LOADING_GIF)
-
-    //   console.log('if this throwback ever works then throw a fucking party')
-    //   if(response_val == 'sucessful delete')
-    //   {
-    //     console.log(response_val + " ,,,, +++ Delete Location Via Ajax Callback Function")
-    //     UNSAVED_URL_PAGE.create()
-    //     UNSAVED_URL_PAGE.bindEvents()
-    //   }
-    //   else
-    //     console.log(response_val + " ,,,, --- Delete Location Via Ajax Callback Function")
-    // })
-    // .done(function(response_val){
-    //   console.log('delete method, done callback worked')
-    //   $("body#Joe_Chrome_Extension_No_Touchie #loading_gif").replaceWith(UNSAVED_URL_PAGE.LOADING_GIF)
-    // })
-
     .always(function(response_val){
       checkIfUrlAlreadySaved()
     });
@@ -230,7 +175,6 @@ var checkIfUrlAlreadySaved = function()
 $(function()
 {
   // determineCurrentUrlTestLocal();
-
   checkIfUrlAlreadySaved();
 });
 
