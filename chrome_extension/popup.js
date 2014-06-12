@@ -2,45 +2,49 @@ var GO_TO_SITE_LINK = "<a href='http://localhost:3000/sites/'>Go To Site</a>";
 
 var current_url;
 
-send_ajax = function(method='post', url='', data={}, return_type='text', callbackFunction={}){
-  if(method.match(/post/i))
-  {
-    xhr = $.ajax({
-      type: method,
-      url: url,
-      data: {'location': current_url},
-      crossDomain: true,
-      xhrFields: {
-        withCredentials: true
-      }, return_type)
-      .done(function(response_val){
-        callbackFunction()
-      })
-    })
-  }
-  else if (method.match(/get/i))
-  {
-    var data_encoded_url = "?" + $.param(data);
+// sendAjax = function(method, url, data, return_type, callbackFunction)
+// { // (method='post', url='', data={}, return_type='text', callbackFunction={})
+//   if(method.match(/post/i))
+//   {
+//     xhr = $.ajax({
+//       type: method,
+//       url: url,
+//       data: {'location': current_url},
+//       crossDomain: true,
+//       xhrFields: { withCredentials: true }
+//       },return_type)
+//       .always(function(response_val){
+//         callbackFunction()
+//       })
 
-    xhr = $.ajax({
-      type: method,
-      url: data_encoded_url,
-      crossDomain: true,
-      xhrFields: {
-      withCredentials: true
-    }, return_type)
-    .done(function(response_val){
-      callbackFunction()
-    });
-  })
-  else
-  {}
+//   }
+//   else if (method.match(/get/i))
+//   {
+//     var data_encoded_url = "?" + $.param(data);
+
+//     xhr = $.ajax({
+//       type: method,
+//       url: data_encoded_url,
+//       crossDomain: true,
+//       xhrFields: { withCredentials: true }
+//     }, return_type)
+//     .always(function(response_val){
+//       callbackFunction()
+//     });
+//   }
+//   else
+//   {}
+// }
+
+determineCurrentUrlTestLocal = function()
+{
+  current_url = document.Url;
 }
 
 determineCurrentUrl = function()
 {
   chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-    current_url = tabs[0].url;
+    document.current_url = tabs[0].url;
   });
 }
 
@@ -70,7 +74,7 @@ SAVED_URL_PAGE =
     })
 
     var url = "http://localhost:3000/sites/1/update"
-    var here = current_url// document.URL // //dejegjfnadffbamjjnnfccbngkpghcbi/popup.html
+    var here = document.URL // //dejegjfnadffbamjjnnfccbngkpghcbi/popup.html
     $('body#Joe_Chrome_Extension_No_Touchie select').change(function(e){
       e.preventDefault();
       xhr = $.ajax({
@@ -82,7 +86,7 @@ SAVED_URL_PAGE =
           withCredentials: true
         }
       }, 'text')
-      .done(function(response_val)
+      .always(function(response_val)
       {
         console.log('select updated to : ' + response_val)
       });
@@ -122,7 +126,7 @@ var saveLocationViaAjax = function(method, url, callback)
   else
     return;
 
-  var here = current_url// document.URL
+  var here = document.URL
   var url = "http://localhost:3000/sites"; // var url = "http://cors-test-101.herokuapp.com/sites" //
 
  console.log('save request')
@@ -134,15 +138,7 @@ var saveLocationViaAjax = function(method, url, callback)
       withCredentials: true
     }
   }, 'json')
-    .done(function(response_val)
-    {
-      // console.log(response_val)
-      // $('.container > img').replaceWith(UNSAVED_URL_PAGE.SAVE_BUTTON)
-      // UNSAVED_URL_PAGE.bindEvents();
-      // $('body#Joe_Chrome_Extension_No_Touchie .container button#save').click()
-      checkIfUrlAlreadySaved()
-    })
-    .fail(function(response_val){
+    .always(function(response_val){
       checkIfUrlAlreadySaved()
     });
 }
@@ -158,7 +154,7 @@ var deleteLocationViaAjax = function(callback)
     return;
   }
 
-  var here = current_url// document.URL
+  var here = document.URL
   var url = "http://localhost:3000/sites/1/delete"; // var url = "http://cors-test-101.herokuapp.com/sites/1/delete" //
   xhr = $.ajax({
     type: "post",
@@ -187,14 +183,15 @@ var deleteLocationViaAjax = function(callback)
     //   console.log('delete method, done callback worked')
     //   $("body#Joe_Chrome_Extension_No_Touchie #loading_gif").replaceWith(UNSAVED_URL_PAGE.LOADING_GIF)
     // })
-    .fail(function(response_val){
+
+    .always(function(response_val){
       checkIfUrlAlreadySaved()
-    })
+    });
 }
 
 var checkIfUrlAlreadySaved = function()
 {
-  var here = current_url// document.URL
+  var here = document.URL
   var url = "http://localhost:3000/sites/has_url_saved"; // var url = "http://cors-test-101.herokuapp.com/users" //
 
   $.ajax({
@@ -204,7 +201,7 @@ var checkIfUrlAlreadySaved = function()
     crossDomain: true,
     xhrFields: { withCredentials: true }
   })
-    .success(function(response_val)
+    .always(function(response_val)
     {
       console.log(response_val)
       switch(response_val)
@@ -232,7 +229,7 @@ var checkIfUrlAlreadySaved = function()
 
 $(function()
 {
-  determineCurrentUrl();
+  // determineCurrentUrlTestLocal();
 
   checkIfUrlAlreadySaved();
 });
