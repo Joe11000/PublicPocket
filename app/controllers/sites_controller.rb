@@ -1,5 +1,6 @@
 class SitesController < ApplicationController
 	def create
+    debugger
 
     if Site.find_by_url(params[:location])
       render json: 'site already saved' and return
@@ -12,13 +13,14 @@ class SitesController < ApplicationController
 	end
 
 	def index
+    debugger
     @sites = Site.all
 	end
 
   def update
+    debugger
     site = Site.find_by_url(params[:location])
     site.update_attributes(status: params[:select_value])
-
 
     if site.status == params[:select_value]
       render text: 'successful update'
@@ -28,8 +30,7 @@ class SitesController < ApplicationController
   end
 
 	def destroy
-    # render( text: 'sucessful delete', header: 200)
-
+    debugger
     respond_to do |format|
 			format.js do
 
@@ -54,6 +55,7 @@ class SitesController < ApplicationController
 	end
 
 	def has_url_saved
+    debugger
     site = Site.where(url: params[:location]).try(:first) # get only the first occurance of this location
 
 		if site.nil?
