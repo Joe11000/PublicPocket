@@ -59,7 +59,7 @@ SAVED_URL_PAGE =
     //var url = "http://localhost:3000/sites/1/update"
     var url = "http://cors-test-101.herokuapp.com/sites/1/update"
 
-    var here = document.URL // //dejegjfnadffbamjjnnfccbngkpghcbi/popup.html
+    var here = window.CURRENT_URL // //dejegjfnadffbamjjnnfccbngkpghcbi/popup.html
     $('body#Joe_Chrome_Extension_No_Touchie select').change(function(e){
       e.preventDefault();
       xhr = $.ajax({
@@ -111,7 +111,7 @@ var saveLocationViaAjax = function()
   else
     return;
 
-  var here = document.URL
+  var here = window.CURRENT_URL
   
   var url = "http://cors-test-101.herokuapp.com/sites" //var url = "http://localhost:3000/sites"; 
 
@@ -141,7 +141,7 @@ var deleteLocationViaAjax = function(callback)
     return;
   }
 
-  var here = document.URL
+  var here = window.CURRENT_URL
   var url = "http://cors-test-101.herokuapp.com/sites/1/delete" // var url = "http://localhost:3000/sites/1/delete"; //
   xhr = $.ajax({
     type: "post",
@@ -159,7 +159,7 @@ var deleteLocationViaAjax = function(callback)
 
 var checkIfUrlAlreadySaved = function()
 {
-  var here = document.URL
+  var here = window.CURRENT_URL
   var url = "http://cors-test-101.herokuapp.com/users" // var url = "http://localhost:3000/sites/has_url_saved"; //
 
   $.ajax({
@@ -197,6 +197,7 @@ var checkIfUrlAlreadySaved = function()
 
 $(function()
 {
+	currentURL();
   // determineCurrentUrlTestLocal();
   checkIfUrlAlreadySaved();
 });
