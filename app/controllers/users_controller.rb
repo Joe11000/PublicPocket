@@ -21,42 +21,13 @@ class UsersController < ApplicationController
 		  headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
 		  headers['Access-Control-Max-Age'] = "1728000"
 		end
-
-  # def set_headers
-  #   headers['Access-Control-Allow-Origin'] = '*'
-  #   headers['Access-Control-Expose-Headers'] = 'ETag'
-  #   headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD'
-  #   headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match'
-  #   headers['Access-Control-Max-Age'] = '86400'
-  # end
-
-# end
-
-
-	# For all responses in this controller, return the CORS access control headers.
-
-
-	# If this is a preflight OPTIONS request, then short-circuit the
-	# request, return only the necessary headers and return an empty
-	# text/plain.
-
-	# def cors_preflight_check
-	#   if request.method == :options
-	#   	debugger
-	#     headers['Access-Control-Allow-Origin'] = '*'
-	#     headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
-	#     headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-Prototype-Version'
-	#     headers['Access-Control-Max-Age'] = '1728000'
-	#     render :text => '', :content_type => 'text/plain'
-	#   end
-	# end
 end
 
 
 
 
 
-# THESE WORKS TO SEND THIS CONTROLLER STUFF
+# THESE WORK TO SEND THIS CONTROLLER STUFF
 
 
 # --------- Without jQuery -------------------------

@@ -1,7 +1,11 @@
+<%= javascript_include_tag "jquery-1.10.2.js" %>
+<%= javascript_include_tag "sites.js"%>
+
 <ul>
   <% @sites.each do |site|%>
     <li class="site">
       <%= link_to "#{site.url}", site.url %>
+      <%= check_box_tag 'post', 'value', site.status == 'read' , class: 'status' %>
       <%= button_to :delete, "/sites/#{site.id}/delete", { action: :destroy, method: :post} %>
     </li>
   <% end %>
