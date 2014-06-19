@@ -1,7 +1,7 @@
 $(function()
 {
-  var HOST = "http://localhost:3000/"
-  // var HOST = "http://cors-test-101.herokuapp.com/"
+  // var HOST = "http://localhost:3000/"
+  var HOST = "http://cors-test-101.herokuapp.com/"
 
 	var GO_TO_SITE_LINK = "<a href='" + HOST + "sites/'>Go To Site</a>";
 
