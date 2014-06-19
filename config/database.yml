@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: cors_test_test
   pool: 5
-  username:
+  username:cors_test
   password:
 
 production:
@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: cors_test_production
   pool: 5
-  username:
+  username:cors_test
   password:
