@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: cors_test_production
   pool: 5
-  username:cors_test
+  username: cors_test
   password:
