@@ -1,18 +1,21 @@
 $(function()
 {
-	var GO_TO_SITE_LINK = "<a href='http://localhost:3000/sites/'>Go To Site</a>";
-  //var GO_TO_SITE_LINK = "<a href='http://cors-test-101.herokuapp.com/sites/'>Go To Site</a>";
+  var HOST = "http://localhost:3000/"
+  // var HOST = "http://cors-test-101.herokuapp.com/"
 
+	var GO_TO_SITE_LINK = "<a href='" + HOST + "sites/'>Go To Site</a>";
 
   var currentUrl = function()
   {
   	try
   	{
+      console.log('take the plunge')
       chrome.tabs.query({currentWindow: true, active: true}, function(tabs)
       {
         window.CURRENT_URL = tabs[0].url;
+        console.log("URL : " + window.CURRENT_URL)
+        checkIfUrlAlreadySaved();
       })
-      console.log('URL : '  + window.CURRENT_URL)
   	}
   	catch (err)
   	{
@@ -20,18 +23,16 @@ $(function()
   	  {
   	    window.CURRENT_URL = document.URL;
         console.log('URL :: ' + window.CURRENT_URL)
+        checkIfUrlAlreadySaved()
       }
   	  else
   	  {
   	  	document.log("Didnt see Type Error")
         console.log('URL :!: ' + window.CURRENT_URL)
+  	    throw "currentUrl() couldn't find browser page location"
       }
-
-  	  return
-  	}
-  	//throw "currentUrl() couldn't find browser page location"
+    }
   }
-
 
   SAVED_URL_PAGE =
   {
@@ -58,8 +59,7 @@ $(function()
         deleteLocationViaAjax();
       })
 
-      var url = "http://localhost:3000/sites/1/update"
-      //var url = "http://cors-test-101.herokuapp.com/sites/1/update"
+      var url = HOST + "sites/1/update"
 
       var here = window.CURRENT_URL // //dejegjfnadffbamjjnnfccbngkpghcbi/popup.html
       $('body#Joe_Chrome_Extension_No_Touchie select').change(function(e){
@@ -115,8 +115,7 @@ $(function()
 
     var here = window.CURRENT_URL
 
-    //var url = "http://cors-test-101.herokuapp.com/sites"
-    var url = "http://localhost:3000/sites";
+    var url = HOST + "sites";
 
    console.log('save request')
     xhr = $.ajax({
@@ -145,8 +144,8 @@ $(function()
     }
 
     var here = window.CURRENT_URL
-    //var url = "http://cors-test-101.herokuapp.com/sites/1/delete"
-     var url = "http://localhost:3000/sites/1/delete"; //
+    var url = HOST + "sites/1/delete";
+
     xhr = $.ajax({
       type: "post",
       url: url,
@@ -164,8 +163,7 @@ $(function()
   var checkIfUrlAlreadySaved = function()
   {
     var here = window.CURRENT_URL
-    //var url = "http://cors-test-101.herokuapp.com/users" //
-    var url = "http://localhost:3000/sites/has_url_saved"; //
+    var url = HOST + "sites/has_url_saved";
 
     $.ajax({
       type: "get",
@@ -193,7 +191,7 @@ $(function()
 
           case 'not_saved': str = "#Joe_Chrome_Extension_No_Touchie .container"
                             $(str).replaceWith(UNSAVED_URL_PAGE.create());
-                            UNSAVED_URL_PAGE.bindEvents();  // $('.container[class="saved"]').replaceWith(UNSAVED_URL_PAGE.create())
+                            UNSAVED_URL_PAGE.bindEvents();
                             break;
           default: console.log( "Error. Url must be either 'unread', 'read', or 'not_saved'. Dont delete Message")
         }
@@ -201,8 +199,6 @@ $(function()
   };
 
 	currentUrl();
-  console.log('post currentUrl')
-  checkIfUrlAlreadySaved();
 });
 
 
