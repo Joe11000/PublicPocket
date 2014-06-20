@@ -4,8 +4,8 @@
 <ul>
   <% @sites.each do |site|%>
     <li class="site">
-      <%= link_to "#{site.url}", site.url %>
       <%= check_box_tag 'post', 'value', site.status == 'read' , class: 'status' %>
+      <%= link_to "#{site.url}", site.url %>
       <%= button_to :delete, "/sites/#{site.id}/delete", { action: :destroy, method: :post} %>
     </li>
   <% end %>
