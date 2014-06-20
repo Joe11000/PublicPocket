@@ -59,8 +59,12 @@ $(function()
         deleteLocationViaAjax();
       })
 
-      var url = HOST + "sites/1/update"
+      $("a:contains('Go To Site')").click(function(e){
+          e.preventDefault();
+          chrome.tabs.create({'url': HOST}, function(){})
+      })
 
+      var url = HOST + "sites/1/update"
       var here = window.CURRENT_URL // //dejegjfnadffbamjjnnfccbngkpghcbi/popup.html
       $('body#Joe_Chrome_Extension_No_Touchie select').change(function(e){
         e.preventDefault();
@@ -97,6 +101,11 @@ $(function()
 
     bindEvents: function(){
       console.log('binding unsaved events')
+
+      $("a:contains('Go To Site')").click(function(e){
+          e.preventDefault();
+          chrome.tabs.create({'url': HOST}, function(){})
+      })
 
       $('body#Joe_Chrome_Extension_No_Touchie button#save').click(function()
       {
