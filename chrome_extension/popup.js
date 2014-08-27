@@ -34,6 +34,34 @@ $(function()
     }
   }
 
+  TAGS_TABLE = {
+    create: function(attached_tags, available_tags){
+
+      // if(attached_tags.length != 0)
+      var available_tags_table = "";
+      var attached_tags_table = "";
+
+      if(available_tags.length > 0)
+      {
+        for (var tag_index = 0; tag_index < available_tags.length; tag_index++) {
+          available_tags_table << "<option value="+ available_tags[tag_index] + (this.read_status == 'unread' ? " selected='selected'" : '') + ">available_tags[tag_index]</option>" +
+        };
+      }
+
+
+      return "<div>" +
+
+               ("<select name='tags[person_id]'>" +
+                 "<option value='unread'" + (this.read_status == 'unread' ? " selected='selected'" : '') + ">Unread</option>" +
+                 "<option value='read'" + (this.read_status == 'read' ? " selected='selected'" : '') + ">Read</option>" +
+               "</select>")
+              "</div>"
+    }
+
+
+
+  }
+
   SAVED_URL_PAGE =
   {
     read_status: 'unread',
