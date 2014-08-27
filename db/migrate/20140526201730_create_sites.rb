@@ -5,6 +5,7 @@ class CreateSites < ActiveRecord::Migration
       t.boolean :secret, default: false
       t.string :status, default: 'unread'
       t.references :user
+      t.references :tag
       t.timestamps
     end
   end
