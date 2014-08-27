@@ -17,7 +17,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: cors_test_development
+  database: pocket_development
   pool: 5
   username:
   password:
@@ -46,15 +46,15 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: cors_test_test
+  database: pocket_test
   pool: 5
-  username:cors_test
+  username:
   password:
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: cors_test_production
+  database: pocket_production
   pool: 5
-  username: cors_test
+  username: pocket
   password:
