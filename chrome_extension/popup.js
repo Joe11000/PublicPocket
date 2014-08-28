@@ -33,34 +33,91 @@ $(function()
       }
     }
   }
-
-  TAGS_TABLE = {
+  TAGS_DIV = {
     create: function(attached_tags, available_tags){
 
-      // if(attached_tags.length != 0)
-      var available_tags_table = "";
-      var attached_tags_table = "";
-
+      available_tags_list = "<select id='available_tags_list'>";
       if(available_tags.length > 0)
       {
         for (var tag_index = 0; tag_index < available_tags.length; tag_index++) {
-          available_tags_table << "<option value="+ available_tags[tag_index] + (this.read_status == 'unread' ? " selected='selected'" : '') + ">available_tags[tag_index]</option>" +
+          available_tags_list += "<option value="+ available_tags[tag_index] + (tag_index == 0 ? " selected='selected'" : '') + ">" + available_tags[tag_index] + "</option>"
         };
       }
+      available_tags_list += "</select><br>"
 
 
-      return "<div>" +
+      var attached_tags_list = "<ul id='attached_tags_list'>";
+      for (var tag_index = 0; tag_index < attached_tags.length; tag_index++) {
+          attached_tags_list += "<li>" + attached_tags[tag_index] + "</li>"
+      };
+      attached_tags_list += "</ul>";
 
-               ("<select name='tags[person_id]'>" +
-                 "<option value='unread'" + (this.read_status == 'unread' ? " selected='selected'" : '') + ">Unread</option>" +
-                 "<option value='read'" + (this.read_status == 'read' ? " selected='selected'" : '') + ">Read</option>" +
-               "</select>")
+
+      return "<div class='tag_table'>" +
+                "<input id='add_tag_text' type=text name='add_tag' placeholder='attach new tag'></input>" +
+                "<button id='add_tag_button' type='button'>Add Tag<button>" +
+                available_tags_list +
+                attached_tags_list +
               "</div>"
+    },
+
+    bindEvents: function(){
+      $('#add_tag_button').click(function(e){
+        console.log('button clicked')
+         e.preventDefault();
+
+         tag_text_box = $('#add_tag_text')
+         tag_name = tag_text_box.val();
+
+        has_no_errors = true;
+         // go through each of the existing tags and make sure new one doesn't exist
+         $('#attached_tags_list li').each(function(){
+            if($(this).text() == tag_name)
+            {
+              console.log('1) found in #attached_tags_list li')
+              // tag_text_box.Error({'error': "tag_name_error", 'name': tag_name})
+              return false;
+            }
+         });
+         console.log('not in #attached_tags_list li')
+        $('#available_tags_list option').each(function(){
+          if($(this).attr('value') == tag_name)
+          {
+            console.log('2) found in #available_tags_list option')
+            // tag_text_box.Error({'error': "tag_name_error", 'name': tag_name})
+            return false;
+          }
+        });
+        console.log('not in #available_tags_list option')
+
+        if(has_no_errors)
+        {
+          // if it doesn't exist already then clear the text box and
+          tag_text_box.val("");
+          new_tag_str = "<li>" + tag_name + "</li>"
+          $('#attached_tags_list').append(new_tag_str)
+        }
+      });
+
+      // if user selects an existing tag, then add it to attached_tag_list and remove from available_tag_list
+      $('#available_tags_list').change(function(e){
+        selected_tag = $('#available_tags_list :selected')
+        tag_name = selected_tag.val();
+        new_tag_str = "<li>" + tag_name + "</li>";
+        $('#attached_tags_list').append(new_tag_str);
+        selected_tag.remove();
+      })
+     },
+
+    Error: function(args_hash) {
+      if(type == 'tag_name_error')
+        console.log('tag' + args_hash['name'] + "already exists" )
     }
 
+    // chooseExistingTag: function(){}
 
+  };
 
-  }
 
   SAVED_URL_PAGE =
   {
@@ -73,7 +130,7 @@ $(function()
                  "<option value='unread'" + (this.read_status == 'unread' ? " selected='selected'" : '') + ">Unread</option>" +
                  "<option value='read'" + (this.read_status == 'read' ? " selected='selected'" : '') + ">Read</option>" +
                "</select>") +
-               "<b>" +
+               "<br>" +
                GO_TO_SITE_LINK +
                "<button id='delete' type='button'>Delete Url</button>" +
               "</div>"
@@ -83,7 +140,6 @@ $(function()
     {
       $('body#Joe_Chrome_Extension_No_Touchie button#delete').click(function()
       {
-        console.log("#22")
         deleteLocationViaAjax();
       })
 
@@ -99,7 +155,7 @@ $(function()
         xhr = $.ajax({
           type: "post",
           url: url,
-          data: {select_value: $("body#Joe_Chrome_Extension_No_Touchie  :selected").val(), 'location': here },
+          data: {select_value: $("body#Joe_Chrome_Extension_No_Touchie :selected").val(), 'location': here },
           crossDomain: true,
           xhrFields: {
             withCredentials: true

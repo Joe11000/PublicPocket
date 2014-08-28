@@ -22,3 +22,7 @@ body#Joe_Chrome_Extension_No_Touchie li.site,
 body#Joe_Chrome_Extension_No_Touchie button {
   display: inline-block;
 }
+
+body#Joe_Chrome_Extension_No_Touchie .attached_tags_list {
+  /*display: inline-block;*/
+}
