@@ -33,6 +33,7 @@ $(function()
       }
     }
   }
+
   TAGS_DIV = {
     create: function(attached_tags, available_tags){
 
@@ -55,7 +56,7 @@ $(function()
 
       return "<div class='tag_table'>" +
                 "<input id='add_tag_text' type=text name='add_tag' placeholder='attach new tag'></input>" +
-                "<button id='add_tag_button' type='button'>Add Tag<button>" +
+                "<button id='add_tag_button' type='button'>Add Tag</button>" +
                 available_tags_list +
                 attached_tags_list +
               "</div>"
@@ -68,6 +69,9 @@ $(function()
 
          tag_text_box = $('#add_tag_text')
          tag_name = tag_text_box.val();
+
+        if(tag_name == "")
+          return false;
 
         has_no_errors = true;
          // go through each of the existing tags and make sure new one doesn't exist
@@ -99,16 +103,36 @@ $(function()
         }
       });
 
-      // if user selects an existing tag, then add it to attached_tag_list and remove from available_tag_list
+      // if user selects an existing tag, then add it to attached_tags_list and remove from available_tags_list
       $('#available_tags_list').change(function(e){
         selected_tag = $('#available_tags_list :selected')
         tag_name = selected_tag.val();
         new_tag_str = "<li>" + tag_name + "</li>";
         $('#attached_tags_list').append(new_tag_str);
         selected_tag.remove();
-      })
-     },
+      });
 
+
+      // $( elements ).on( events, selector, data, handler );
+      $( '#attached_tags_list' ).on( 'click', ' li',  function(){
+        var removing_tag_name = this.innerHTML
+        $('#attached_tags_list li:contains('+ removing_tag_name +')').remove()
+        $('this').css('background-color', 'blue')
+        removing_tag_name_str = "<option value=" + removing_tag_name +">" + removing_tag_name + "</option>"
+        $('#available_tags_list').append(removing_tag_name_str);
+      });
+
+      // // if user clicks on li then remove it and put it back on available_tags_list
+      // $('#available_tags_list').change(function(e){
+      //   // selected_tag = $('#available_tags_list :selected')
+      //   // tag_name = selected_tag.val();
+      //   // new_tag_str = "<li>" + tag_name + "</li>";
+      //   // $('#attached_tags_list').append(new_tag_str);
+      //   // selected_tag.remove();
+      // })
+    },
+
+    // does nothing at the moment
     Error: function(args_hash) {
       if(type == 'tag_name_error')
         console.log('tag' + args_hash['name'] + "already exists" )
@@ -133,6 +157,7 @@ $(function()
                "<br>" +
                GO_TO_SITE_LINK +
                "<button id='delete' type='button'>Delete Url</button>" +
+               TAGS_DIV.create(['one', 'two', 'three'],['four', 'five', 'six']) +
               "</div>"
     },
 
@@ -141,12 +166,13 @@ $(function()
       $('body#Joe_Chrome_Extension_No_Touchie button#delete').click(function()
       {
         deleteLocationViaAjax();
-      })
+      });
 
       $("a:contains('Go To Site')").click(function(e){
           e.preventDefault();
           chrome.tabs.create({'url': HOST}, function(){})
-      })
+      });
+
 
       var url = HOST + "sites/1/update"
       var here = window.CURRENT_URL // //dejegjfnadffbamjjnnfccbngkpghcbi/popup.html
@@ -165,8 +191,9 @@ $(function()
         {
           console.log('select updated to : ' + response_val)
         });
-      })
-      console.log('binding saved events 1 ')
+      });
+
+      TAGS_DIV.bindEvents();
     }
   };
 
