@@ -64,7 +64,6 @@ $(function()
 
     bindEvents: function(){
       $('#add_tag_button').click(function(e){
-        console.log('button clicked')
          e.preventDefault();
 
          tag_text_box = $('#add_tag_text')
@@ -80,26 +79,29 @@ $(function()
             {
               console.log('1) found in #attached_tags_list li')
               // tag_text_box.Error({'error': "tag_name_error", 'name': tag_name})
-              return false;
+              has_no_errors = false;
             }
          });
-         console.log('not in #attached_tags_list li')
         $('#available_tags_list option').each(function(){
           if($(this).attr('value') == tag_name)
           {
             console.log('2) found in #available_tags_list option')
             // tag_text_box.Error({'error': "tag_name_error", 'name': tag_name})
-            return false;
+            has_no_errors = false;
           }
         });
-        console.log('not in #available_tags_list option')
 
         if(has_no_errors)
         {
           // if it doesn't exist already then clear the text box and
+          console.log('No errors found ')
+
           tag_text_box.val("");
           new_tag_str = "<li>" + tag_name + "</li>"
           $('#attached_tags_list').append(new_tag_str)
+          console.log('wtf? ')
+
+          updateTagsViaAjax('add', tag_name);
         }
       });
 
@@ -110,26 +112,18 @@ $(function()
         new_tag_str = "<li>" + tag_name + "</li>";
         $('#attached_tags_list').append(new_tag_str);
         selected_tag.remove();
+        updateTagsViaAjax('add', tag_name);
       });
 
 
-      // $( elements ).on( events, selector, data, handler );
-      $( '#attached_tags_list' ).on( 'click', ' li',  function(){
-        var removing_tag_name = this.innerHTML
-        $('#attached_tags_list li:contains('+ removing_tag_name +')').remove()
-        $('this').css('background-color', 'blue')
-        removing_tag_name_str = "<option value=" + removing_tag_name +">" + removing_tag_name + "</option>"
+      // put attached_tags_list item back in available_tags_list if clicked on
+      $('#attached_tags_list').on( 'click', ' li',  function(){
+        var removing_tag_name = this.innerHTML;
+        $('#attached_tags_list li:contains('+ removing_tag_name +')').remove();
+        removing_tag_name_str = "<option value=" + removing_tag_name +">" + removing_tag_name + "</option>";
         $('#available_tags_list').append(removing_tag_name_str);
+        updateTagsViaAjax('remove', removing_tag_name);
       });
-
-      // // if user clicks on li then remove it and put it back on available_tags_list
-      // $('#available_tags_list').change(function(e){
-      //   // selected_tag = $('#available_tags_list :selected')
-      //   // tag_name = selected_tag.val();
-      //   // new_tag_str = "<li>" + tag_name + "</li>";
-      //   // $('#attached_tags_list').append(new_tag_str);
-      //   // selected_tag.remove();
-      // })
     },
 
     // does nothing at the moment
@@ -251,6 +245,29 @@ $(function()
         checkIfUrlAlreadySaved()
       });
   }
+
+  var updateTagsViaAjax = function(add_or_remove, tag_name)
+  {
+
+    var here = window.CURRENT_URL
+
+    var url = HOST + "tags/" + add_or_remove;
+
+   console.log('save request')
+    xhr = $.ajax({
+      type: 'post',
+      url: url,
+      data: {'location': here, 'tag': tag_name},
+      crossDomain: true,
+      xhrFields: {
+        withCredentials: true
+      }
+    }, 'json')
+      // .always(function(response_val){
+      //   console.log(add_change_or_remove + ' of ' + tag_name + ' completed!')
+      // });
+  }
+
 
   var deleteLocationViaAjax = function(callback)
   {
