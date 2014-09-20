@@ -18,6 +18,7 @@
 	    <li class="site">
 	      <%= check_box_tag 'post', 'value', site.status == 'read' , class: 'status' %>
 	      <%= link_to "#{site.url}", site.url %>
+        <div id="14111732322059" class="wE"><script src="http://widget-engine.com/w:0:003:14111732322059:4:000000:40" type="text/javascript"></script><a href="http://widget-engine.com/ratingcode.php" class="wE" title="Free Rating Code for your webprojects">Get free premium widgets for your blog and website.</a></div>
 	      <%= button_to :delete, "/sites/#{site.id}/delete", { action: :destroy, method: :post} %>
 	    </li>
 	  <% end %>

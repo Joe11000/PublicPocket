@@ -11,7 +11,9 @@ class SitesController < ApplicationController
 	end
 
 	def index
-    @sites = Site.readonly.order("url ASC")
+    @sites = Site.readonly.order(status: :asc, url: :asc,)
+    debugger
+    debugger
 	end
 
   def update
