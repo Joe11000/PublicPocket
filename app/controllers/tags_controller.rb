@@ -1,10 +1,5 @@
 class TagsController < ApplicationController
   def add
-    # debugger
-    # debugger
-
-    Tag.hey_there
-
     site = Site.where(url: params[:location]).first
 
     site_has_tag = site.tags.where(name: params[:tag]).size != 0
