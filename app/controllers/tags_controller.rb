@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   def add
-    site = Site.where(url: params[:location]).first
+    site = Site.where(url: params[:url]).first
 
     site_has_tag = site.tags.where(name: params[:tag]).size != 0
     tag_exists = Tag.where(name: params[:tag]).size != 0
@@ -23,7 +23,7 @@ class TagsController < ApplicationController
 
   def remove
     # debugger
-    site = Site.where(url: params[:location]).first
+    site = Site.where(url: params[:url]).first
 
     if(site)
       site.tags.where(name: params[:tag]).destroy_all # removes SiteTag association

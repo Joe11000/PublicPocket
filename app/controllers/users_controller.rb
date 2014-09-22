@@ -33,7 +33,7 @@ end
 # --------- Without jQuery -------------------------
 # ---- Running on Server Locally
 # var data = new FormData();
-# data.append('location', window.location.toString())
+# data.append('url', window.location.toString())
 # var url = "http://localhost:3000/users";
 # var xhr = new XMLHttpRequest();
 # xhr.open("post", url, true);
@@ -43,7 +43,7 @@ end
 
 # ---- Hosted on Heroku
 # var data = new FormData();
-# data.append('location', window.location.toString())
+# data.append('url', window.location.toString())
 # var url = "http://cors-test-101.herokuapp.com/users";
 # var xhr = new XMLHttpRequest();
 # xhr.open("post", url, true);
@@ -71,7 +71,7 @@ end
 # xhr = $.ajax({
 #   type: "post",
 #   url: "http://localhost:3000/users",
-#   data: {'location': here},
+#   data: {'url': here},
 #   crossDomain: true,
 #   xhrFields: {
 #     withCredentials: true
@@ -93,7 +93,7 @@ end
 # xhr = $.ajax({
 #   type: "post",
 #   url: "http://cors-test-101.herokuapp.com/users/",
-#   data: {'location': here},
+#   data: {'url': here},
 #   crossDomain: true,
 #   xhrFields: {
 #     withCredentials: true

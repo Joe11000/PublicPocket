@@ -29,7 +29,7 @@ $(function()
   	  {
   	  	document.log("Didnt see Type Error")
         console.log('URL :!: ' + window.CURRENT_URL)
-  	    throw "currentUrl() couldn't find browser page location"
+  	    throw "currentUrl() couldn't find browser page url"
       }
     }
   }
@@ -159,7 +159,7 @@ $(function()
     {
       $('body#Joe_Chrome_Extension_No_Touchie button#delete').click(function()
       {
-        deleteLocationViaAjax();
+        deleteUrlViaAjax();
       });
 
       $("a:contains('Go To Site')").click(function(e){
@@ -175,7 +175,7 @@ $(function()
         xhr = $.ajax({
           type: "post",
           url: url,
-          data: {select_value: $("body#Joe_Chrome_Extension_No_Touchie :selected").val(), 'location': here },
+          data: {read_status: $("body#Joe_Chrome_Extension_No_Touchie :selected").val(), 'url': here },
           crossDomain: true,
           xhrFields: {
             withCredentials: true
@@ -215,12 +215,12 @@ $(function()
       $('body#Joe_Chrome_Extension_No_Touchie button#save').click(function()
       {
         console.log("save button clicked 1")
-        saveLocationViaAjax();
+        saveUrlViaAjax();
       });
     }
   };
 
-  var saveLocationViaAjax = function()
+  var saveUrlViaAjax = function()
   {
     if($('body#Joe_Chrome_Extension_No_Touchie .container > button').size() > 0)
       $('body#Joe_Chrome_Extension_No_Touchie .container > button').replaceWith(UNSAVED_URL_PAGE.LOADING_GIF);
@@ -235,7 +235,7 @@ $(function()
     xhr = $.ajax({
       type: 'post',
       url: url,
-      data: {'location': here},
+      data: {'url': here},
       crossDomain: true,
       xhrFields: {
         withCredentials: true
@@ -257,7 +257,7 @@ $(function()
     xhr = $.ajax({
       type: 'post',
       url: url,
-      data: {'location': here, 'tag': tag_name},
+      data: {'url': here, 'tag': tag_name},
       crossDomain: true,
       xhrFields: {
         withCredentials: true
@@ -269,9 +269,9 @@ $(function()
   }
 
 
-  var deleteLocationViaAjax = function(callback)
+  var deleteUrlViaAjax = function(callback)
   {
-    console.log('start deleteLocationViaAjax()')
+    console.log('start deleteUrlViaAjax()')
     if($('body#Joe_Chrome_Extension_No_Touchie button#delete').size() > 0)
       $('body#Joe_Chrome_Extension_No_Touchie button#delete').replaceWith(UNSAVED_URL_PAGE.LOADING_GIF);
     else
@@ -286,7 +286,7 @@ $(function()
     xhr = $.ajax({
       type: "post",
       url: url,
-      data: {'location': here},
+      data: {'url': here},
       crossDomain: true,
       xhrFields: {
         withCredentials: true
@@ -305,7 +305,7 @@ $(function()
     $.ajax({
       type: "get",
       url: url,
-      data: { 'location': here },
+      data: { 'url': here },
       crossDomain: true,
       xhrFields: { withCredentials: true }
     })

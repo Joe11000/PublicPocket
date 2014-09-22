@@ -3,4 +3,6 @@ class Site < ActiveRecord::Base
 
   has_many :site_tags
   has_many :tags, through: :site_tags, dependent: :destroy
+
+  validate :status, acceptance: { accept: %w[ unread reading readed ] }
 end

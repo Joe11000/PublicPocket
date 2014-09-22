@@ -15,7 +15,7 @@ $(function()
       xhr = $.ajax({
         type: "post",
         url: url,
-        data: { 'location': url_status_to_modify, 'select_value': status },
+        data: { 'url': url_status_to_modify, 'read_status': status },
         crossDomain: true,
         xhrFields: {
           withCredentials: true
