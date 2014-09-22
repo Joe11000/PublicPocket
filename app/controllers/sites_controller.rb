@@ -15,6 +15,7 @@ class SitesController < ApplicationController
 	end
 
   def update
+    debugger
     site = Site.find_by_url(params[:location])
     site.update_attributes(status: params[:select_value])
 

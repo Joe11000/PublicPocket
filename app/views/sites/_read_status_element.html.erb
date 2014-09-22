@@ -1,0 +1,18 @@
+<!-- <select name='post[person_id]'> +
+  <option value='unread'" + (this.read_status == 'unread' ? " selected='selected'" : '') + ">Unread</option>" +
+  <option value='read'" + (this.read_status == 'read' ? " selected='selected'" : '') + ">Read</option>" +
+</select>" -->
+
+
+<!-- needs   locals : { status: site.status  }  -->
+<%= select_tag params[:site], options_for_select( %w[ Unread Reading Readed ], locals[:site].status) %>
+
+<script type="text/javascript">
+  $('#select_tag_id').change(function(){
+    $ajax({
+      url: "/sites/" + escape_javascript(params[:site].id) + "/update",
+      type: "POST",
+      data: { url: document.location, select_tag_value: $("[name=" + escape_javascript(params[:site] + "] option:selected").text()}
+    })
+  });
+</script>

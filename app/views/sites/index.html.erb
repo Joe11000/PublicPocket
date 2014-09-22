@@ -2,41 +2,54 @@
 <%= javascript_include_tag "sites.js"%>
 
 <div class="container">
-
+<div class="page-header">
+  <h1 class="text-center">Book Mark Application</h1>
+</div>
     <div class="row">
       <!-- side column -->
       <div class="col-lg-2">
-         <%= render side_column %>
+         <%= render "side_column" %>
       </div>
 
       <!-- main content -->
       <div class="col-lg-10">
-        <table>
-          <tr>
-            <td>Read?</td>
-            <td>Link</td>
-            <td>Delete</td>
-          </tr>
 
-            <tr>
-            <td>Read?</td>
-            <td>Link</td>
-            <td>Delete</td>
-          </tr>
-          <ul>
-            <% @sites.each do |site|%>
-                <li class="site list-group">
+
+        <table class="table-condensed table-striped">
+          <thead>
+            <th>
+              <td>Title</td>
+              <td>Url</td>
+              <td>Rating</td>
+            </th>
+          </thead>
+
+          <tbody>
+
+
+
+
+
+
+
+            <% @sites.each_with_index do |site, index|%>
+              <tr>
+                <td class="site list-group">
+                  <td><%= index + 1 %></td>
                     <%= content_tag(:div, { class: "list-group-item" }) do %>
                         <%= check_box_tag 'post', 'value', site.status == 'read' , class: 'status' %>
+
                         <%= link_to "#{site.url}", site.url %>
                          <div id="14111732322059" class="wE"><script src="http://widget-engine.com/w:0:003:14111732322059:4:000000:40" type="text/javascript"></script><a href="http://widget-engine.com/ratingcode.php" class="wE" title="Free Rating Code for your webprojects">Get free premium widgets for your blog and website.</a></div>
+
+                        <%= render "read_status_element", locals: { site: site } %>
                         <%= button_to :delete, "/sites/#{site.id}/delete", { action: :destroy, method: :post} %>
                     <% end %>
-                </li>
+                </td>
+              </tr>
             <% end %>
-
-        </table>
-        </ul>
+            </tbody>
+          </table>
 
       </div>
 
