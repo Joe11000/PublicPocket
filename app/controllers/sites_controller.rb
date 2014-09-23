@@ -1,7 +1,8 @@
 class SitesController < ApplicationController
-  before_action
+  before_action :set_site, only: [:update, :destroy]
 
 	def create
+    debugger
     if Site.find_by_url(sites_params[:url])
       render json: 'site already saved' and return
     end
@@ -13,19 +14,23 @@ class SitesController < ApplicationController
 	end
 
   def new
+    debugger
     @site = Site.new
   end
 
 	def index
-    @sites = Site.readonly.order(status: :asc, url: :asc)
+    debugger
+    @unread_sites = Site.where(read_status: "unread").order(title: :asc).includes(:tags)
+    @reading_sites = Site.where(read_status: "reading").order(title: :asc).includes(:tags)
+    @readed_sites = Site.where(read_status: "readed").order(title: :asc).includes(:tags)
 	end
 
   def update
     debugger
     site = Site.find_by_url(sites_params[:url])
-    site.update(status: sites_params[:read_status])
+    site.update(read_status: sites_params[:read_status])
 
-    if site.status == sites_params[:read_status]
+    if site.read_status == sites_params[:read_status]
       render text: 'successful update'
     else
       render text: 'unsuccessful update'
@@ -33,6 +38,7 @@ class SitesController < ApplicationController
   end
 
 	def destroy
+    debugger
     respond_to do |format|
 			format.js do
 
@@ -60,7 +66,7 @@ class SitesController < ApplicationController
 		if site.nil?
       render text: 'not_saved' and return
     else
-      case site.status
+      case site.read_status
         when 'unread' then render text: 'unread'  and return
         when 'read'   then render text: 'read'    and return
         else; render text: 'unknown', header: 501 and return
@@ -74,7 +80,8 @@ class SitesController < ApplicationController
       params.require(:sites).permit(:url, :title, :read_status)
     end
 
-    def set_user
-      User.first
+    def set_site
+      debugger
+      @user = Site.find(sites_params[:url])
     end
 end

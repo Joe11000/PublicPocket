@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20140922033126) do
 
   create_table "sites", force: true do |t|
     t.string   "url"
-    t.boolean  "secret",     default: false
-    t.string   "status",     default: "unread"
+    t.boolean  "secret",      default: false
+    t.string   "read_status", default: "unread"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

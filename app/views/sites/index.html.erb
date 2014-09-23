@@ -5,40 +5,41 @@
 <div class="page-header">
   <h1 class="text-center">Book Mark Application</h1>
 </div>
-    <div class="row">
-      <!-- side column -->
-      <div class="col-lg-2">
-         <%= render "side_column" %>
-      </div>
+  <div class="row">
+    <!-- side column -->
+    <div class="col-lg-2">
+       <%= render "side_column"%>
+    </div>
 
-      <!-- main content -->
-      <div class="col-lg-10">
+    <!-- main content -->
+    <div class="col-lg-10">
 
+    <% [@unread_sites, @reading_sites, @readed_sites].each_with_index do |sites, index|%>
+      <table class="table-condensed table-striped">
+        <caption><%= %w[ Unread Reading Readed][index] %></caption>
+        <thead>
+          <th>
+            <td>Row</td>
+            <td>Title</td>
+            <td>Url</td>
+            <td>Read Status</td>
+            <td>Rating</td>
+          </th>
+        </thead>
 
-        <table class="table-condensed table-striped">
-          <thead>
-            <th>
-              <td>Row</td>
-              <td>Title</td>
-              <td>Url</td>
-              <td>Status</td>
-              <td>Rating</td>
+        <tbody>
 
-            </th>
-          </thead>
+          <% sites.each_with_index do |site, index|%>
+            <tr>
+                <%= render "list_item", locals: { site: site, index: index }%>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
 
-          <tbody>
-
-            <% @sites.each_with_index do |site, index|%>
-              <tr>
-                <td class="site list-group">
-                  <%= render "list_item", locals: { site: site, index: index }%>
-                </td>
-              </tr>
-            <% end %>
-            </tbody>
-          </table>
-
-      </div>
+    <br>
+    <br>
+  </div>
 
 </div>

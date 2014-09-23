@@ -2,13 +2,13 @@
 <div id="side_col" >
   <div class="list-group">
       <a href="#" class="list-group-item active">
-          <span class="glyphicon glyphicon-camera"></span> Reading <span class="badge"><%=  %></span>
+          <span class="glyphicon glyphicon-camera"></span> Reading <span class="badge"><%= @unread_sites.size %></span>
       </a>
       <a href="#" class="list-group-item active">
-          <span class="glyphicon glyphicon-file"></span> UnRead <span class="badge"><%=  %></span>
+          <span class="glyphicon glyphicon-file"></span> UnRead <span class="badge"><%=  @reading_sites.size %></span>
       </a>
       <a href="#" class="list-group-item active">
-          <span class="glyphicon glyphicon-music"></span> Readed <span class="badge"><%=  %></span>
+          <span class="glyphicon glyphicon-music"></span> Readed <span class="badge"><%=  @readed_sites.size %></span>
       </a>
   </div>
 </div>
