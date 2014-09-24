@@ -18,17 +18,14 @@
       <table class="table-condensed table-striped">
         <caption><%= %w[ Unread Reading Readed][index] %></caption>
         <thead>
-          <th>
-            <td>Row</td>
-            <td>Title</td>
-            <td>Url</td>
-            <td>Read Status</td>
-            <td>Rating</td>
-          </th>
+          <th>Row</th>
+          <th>Title</th>
+          <th>Url</th>
+          <th>Read Status</th>
+          <th>Rating</th>
         </thead>
 
         <tbody>
-
           <% sites.each_with_index do |site, index|%>
             <tr>
                 <%= render "list_item", locals: { site: site, index: index } %>
