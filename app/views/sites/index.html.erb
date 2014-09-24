@@ -14,9 +14,13 @@
     <!-- main content -->
     <div class="col-lg-10">
 
-    <% [@unread_sites, @reading_sites, @readed_sites].each_with_index do |sites, index|%>
-      <table class="table-condensed table-striped">
-        <caption><%= %w[ Unread Reading Readed][index] %></caption>
+
+    <% colors_array = %w[ active success info warning danger ] %>
+    <% read_status_array = %w[ Reading Unread Readed ] %>
+
+    <% [ @reading_sites, @unread_sites, @readed_sites].each_with_index do |sites, index|%>
+      <table class="table table-condensed table-striped">
+        <caption><%= read_status_array[index] %></caption>
         <thead>
           <th>Row</th>
           <th>Title</th>
@@ -27,16 +31,14 @@
 
         <tbody>
           <% sites.each_with_index do |site, index|%>
-            <tr>
-                <%= render "list_item", locals: { site: site, index: index } %>
+            <tr class=<%= colors_array[index % colors_array.size] %>>
+              <%= render "list_item", locals: { site: site, index: index } %>
             </tr>
           <% end %>
         </tbody>
       </table>
     <% end %>
 
-    <br>
-    <br>
   </div>
 
 </div>
