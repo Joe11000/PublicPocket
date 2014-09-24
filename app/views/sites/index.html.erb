@@ -16,11 +16,11 @@
 
 
     <% colors_array = %w[ active success info warning danger ] %>
-    <% read_status_array = %w[ Reading Unread Readed ] %>
+    <% read_status_array = %w[ reading unread readed ] %>
 
     <% [ @reading_sites, @unread_sites, @readed_sites].each_with_index do |sites, index|%>
-      <table class="table table-condensed table-striped">
-        <caption><%= read_status_array[index] %></caption>
+      <table class="table table-condensed table-striped" id=<%= read_status_array[index] + "_table"%>>
+        <caption><%= read_status_array[index].capitalize %></caption>
         <thead>
           <th>Row</th>
           <th>Title</th>
