@@ -1,0 +1,31 @@
+<h1>Listing sits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Title</th>
+      <th>Age</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sits.each do |sit| %>
+      <tr>
+        <td><%= sit.name %></td>
+        <td><%= sit.title %></td>
+        <td><%= sit.age %></td>
+        <td><%= link_to 'Show', sit %></td>
+        <td><%= link_to 'Edit', edit_sit_path(sit) %></td>
+        <td><%= link_to 'Destroy', sit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sit', new_sit_path %>

@@ -3,34 +3,35 @@
     <%= form_for locals[:site], {remote: true} do |f|%>
       <% row_num = locals[:index] + 1 %>
       <td><%= label_tag(locals[:index] + 1) %></td>
-      <!-- <div class="clearfix visible-xs-block"></div> -->
 
       <td><%= f.text_field :title %></td>
-      <!-- <div class="clearfix visible-xs-block "></div> -->
 
       <td><%= link_to locals[:site].url %></td>
-      <div class="clearfix visible-xs-block "></div>
 
       <td>
         <%= f.select :read_status, options_for_select( %w[ Unread Reading Readed ], locals[:site].read_status) %>
       </td>
-      <!-- <div class="clearfix visible-xs-block "></div> -->
 
       <td id=<%= "star_rating_#{row_num}" %> >
   <!--        <div id="14111732322059" class="wE"><script src="http://widget-engine.com/w:0:003:14111732322059:4:000000:40" type="text/javascript"></script><a href="http://widget-engine.com/ratingcode.php" class="wE" title="Free Rating Code for your webprojects">Get free premium widgets for your blog and website.</a></div> -->
       </td>
-      <!-- <div class="clearfix visible-xs-block "></div> -->
 
       <td><%= f.submit :submit, {class: "btn btn-primary hide"} %></td>
 
-      <td><%= f.submit :delete, {class: "btn btn-danger", action: :destroy} %></td>
-      <!-- <div class="clearfix visible-xs-block "></div> -->
+      <!-- <td><%#= f.submit :delete, {class: "btn btn-danger", action: :destroy} %></td> -->
+
+
+
+<%#= button_to('Destroy', site, method: "delete", remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' }) %>
+
+
+
+      <!-- <td><%#= button_to 'Destroy', { form_class: "btn btn-danger"}, method: :delete, data: { confirm: 'Are you sure?'  %></td> -->
 
     <td>
       <br>
         <ul>
-          <%= select_tag "tags", options_for_select(locals[:site].tags.map{ |tag| tag.name}, locals[:site].tags.first.name) %>
-          <%# select_tag "tags", options_for_select(["a", "b"], "a") %>
+          <%= select_tag "tags", options_for_select(locals[:site].tags.pluck(:name), locals[:site].tags.first.name) %>
         </ul>
     </td>
 

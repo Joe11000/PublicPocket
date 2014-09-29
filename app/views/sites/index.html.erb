@@ -18,8 +18,9 @@
     <% colors_array = %w[ active success info warning danger ] %>
     <% read_status_array = %w[ reading unread readed ] %>
 
+<div class="table-responsive">
     <% [ @reading_sites, @unread_sites, @readed_sites].each_with_index do |sites, index|%>
-      <table class="table table-condensed table-striped" id=<%= read_status_array[index] + "_table"%>>
+      <table class="table table-condensed table-responsive" id=<%= read_status_array[index] + "_table"%>>
         <caption><%= read_status_array[index].capitalize %></caption>
         <thead>
           <th>Row</th>
@@ -38,6 +39,7 @@
         </tbody>
       </table>
     <% end %>
+    </div>
 
   </div>
 

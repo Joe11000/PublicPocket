@@ -1,5 +1,7 @@
 CorsTest::Application.routes.draw do
 
+  resources :sits
+
   get '/sites/has_url_saved', to: 'sites#has_url_saved'
   # post '/sites/:id/delete' => 'sites#destroy'
   # post '/sites/:id/update' => 'sites#update'
