@@ -1,7 +1,7 @@
 $(function()
 {
-  var HOST = "http://localhost:3000/"
-  // var HOST = "http://cors-test-101.herokuapp.com/"
+  // var HOST = "http://localhost:3000/"
+  var HOST = "http://cors-test-101.herokuapp.com/"
 
 	var GO_TO_SITE_LINK = "<a href='" + HOST + "sites/'>Go To Site</a>";
 
@@ -9,13 +9,13 @@ $(function()
   {
   	try
   	{
-      console.log('take the plunge')
+      console.log('take the plunge');
       chrome.tabs.query({currentWindow: true, active: true}, function(tabs)
       {
         window.CURRENT_URL = tabs[0].url;
         console.log("URL : " + window.CURRENT_URL)
         checkIfUrlAlreadySaved();
-      })
+      });
   	}
   	catch (err)
   	{
@@ -34,10 +34,12 @@ $(function()
     }
   }
 
+
+ // tags already should be in sorted order
   TAGS_DIV = {
     create: function(attached_tags, available_tags){
 
-      available_tags_list = "<select id='available_tags_list'>";
+      available_tags_list = "<select multiple id='available_tags_list'>";
       if(available_tags.length > 0)
       {
         for (var tag_index = 0; tag_index < available_tags.length; tag_index++) {
@@ -55,8 +57,8 @@ $(function()
 
 
       return "<div class='tag_table'>" +
-                "<input id='add_tag_text' type=text name='add_tag' placeholder='attach new tag'></input>" +
-                "<button id='add_tag_button' type='button'>Add Tag</button>" +
+                "<input  id='add_tag_text' type=text name='add_tag' placeholder='attach new tag'></input>" +
+                "<button class='btn btn-info' id='add_tag_button' type='button'>Add Tag</button>" +
                 available_tags_list +
                 attached_tags_list +
               "</div>"

@@ -19,11 +19,12 @@ class SitesController < ApplicationController
   end
 
   def show
+    debugger
     #show the site with all the tags attached
   end
 
 	def index
-    # debugger
+    debugger
     @unread_sites = Site.where(read_status: "unread").order(title: :asc).includes(:tags)
     @reading_sites = Site.where(read_status: "reading").order(title: :asc).includes(:tags)
     @readed_sites = Site.where(read_status: "readed").order(title: :asc).includes(:tags)
