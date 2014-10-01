@@ -15,3 +15,16 @@
 .hide{
   display: none !important;
 }
+
+@font-face {
+    font-family: joe_font;
+    src: url(fonts/joe_font.ttf);
+
+}
+
+.joe_font {
+  font-family: joe_font;
+  font-size: 200%;
+  color: green;
+}
+/**/

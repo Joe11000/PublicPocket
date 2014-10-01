@@ -45,6 +45,11 @@ group :test do
   gem "guard-rspec"
   gem "launchy"
   gem "shoulda"
+  gem 'database_cleaner', '~> 1.3.0'
+end
+
+group :development, :test do
+  gem "debugger"
 end
 
 # Use ActiveModel has_secure_password
@@ -58,7 +63,6 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem "debugger"
 group :production do
   gem 'rails_12factor'  # heroku deployment needs this
   gem 'thin'

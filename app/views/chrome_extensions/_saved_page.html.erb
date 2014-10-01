@@ -1,9 +1,9 @@
-<% @site_tags = @site.includes(:tags)
+<%# @site_tags = @site.includes(:tags)
 @user_tags = User.first.tags %>
 
 
 <div class='container saved'>
-
+  <p class="joe_font">Saved Page</p>
   <%#= select_tag "tags", options_for_select(@user_tags, @site_tags), multiple: true %>
 
 </div>

@@ -1,2 +1,6 @@
-<p>Now Render Partial</p>
-<%#= render partial: "saved_page" %>
+<% if @site %>
+  <%= render partial: "saved_page" %>
+<% else %>
+  <%= render partial: "unsaved_page" %>
+<% end %>
+
