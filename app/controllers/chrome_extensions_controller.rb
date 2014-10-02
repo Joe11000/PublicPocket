@@ -1,8 +1,8 @@
 class ChromeExtensionsController < ApplicationController
 
-  # layout 'chrome_extension'
+  layout 'chrome_extension'
 
-  def get_saved_or_unsaved_page
+  def get_saved_or_unsaved_site_page
     respond_to do |format|
       format.js do
         # debugger
@@ -11,17 +11,17 @@ class ChromeExtensionsController < ApplicationController
 
         @site = Site.includes(:tags).where(sites: {url: params[:url]})
 
-        render :get_saved_or_unsaved_page, layout: "layouts/chrome_extension"
+        render :get_saved_or_unsaved_site_page
       end
 
       format.html do
-        debugger
+        # debugger
 
         @location = params[:location]
 
         @site = Site.includes(:tags).where(sites: {url: params[:url]})
 
-        render :get_saved_or_unsaved_page, layout: "layouts/chrome_extension"
+        render :get_saved_or_unsaved_site_page
       end
     end
   end

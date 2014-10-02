@@ -27,7 +27,7 @@ RSpec.describe ChromeExtensionsController, :type => :controller do
 
       before :each do
         @request.env['HTTP_ACCEPT'] = "text/javascript"
-        get :get_saved_or_unsaved_page, url: @existing_site.url
+        get :get_saved_or_unsaved_site_page, url: @existing_site.url
       end
 
       it "has a 200 status code" do
@@ -57,7 +57,7 @@ RSpec.describe ChromeExtensionsController, :type => :controller do
 
       before :each do
         @request.env['HTTP_ACCEPT'] = "text/javascript"
-        get :get_saved_or_unsaved_page, url: @new_site.url
+        get :get_saved_or_unsaved_site_page, url: @new_site.url
       end
 
       it "has a 200 status code" do

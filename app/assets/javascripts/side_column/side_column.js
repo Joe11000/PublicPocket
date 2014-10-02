@@ -1,36 +1,4 @@
 $(function(){
-
-  // { // Change position of side col on window resize
-  //   var pxl_lg = 1170;
-
-  //   // initial setting
-  //   $(window).load(function()
-  //   {
-  //     if($(window).width() >= pxl_lg)
-  //     {
-  //       $("#side_col").addClass("sx-sm-md-side-col").removeClass("lg-side-col")
-  //     }
-  //     else
-  //     {
-  //       $("#side_col").addClass("lg-side-col").removeClass("sx-sm-md-side-col")
-  //     }
-  //   })
-
-  //   // resizing
-  //   $(window).resize(function()
-  //   {
-  //     if( $(window).width() < pxl_lg )
-  //     {
-  //       $("#side_col").addClass("sx-sm-md-side-col").removeClass("lg-side-col")
-  //     }
-  //     else
-  //     {
-  //       $("#side_col").addClass("lg-side-col").removeClass("sx-sm-md-side-col")
-  //     }
-  //   });
-  // }
-
-
   { // hide tables when side_col item clicked
     $(".list-group-item").each(function()
     {

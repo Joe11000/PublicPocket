@@ -1,0 +1,20 @@
+// Place all the styles related to the chrome_extensions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.hide {
+  display: none !important;
+}
+
+@font-face {
+    font-family: joe_font;
+    src: url(fonts/joe_font.ttf);
+
+}
+
+.joe_font {
+  font-family: joe_font;
+  font-size: 200%;
+  color: green;
+}

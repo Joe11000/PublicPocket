@@ -1,14 +1,15 @@
-// $(function()
-// {
-//   // var HOST = "http://localhost:3000/"
-//   var HOST = "http://cors-test-101.herokuapp.com/"
+$(function(){
+  alert('chrome js loaded'); //delete this line
 
-// 	var GO_TO_SITE_LINK = "<a href='" + HOST + "sites/'>Go To Site</a>";
+  // var HOST = "http://localhost:3000/"
+  var HOST = "http://cors-test-101.herokuapp.com/"
+
+//  var GO_TO_SITE_LINK = "<a href='" + HOST + "sites/'>Go To Site</a>";
 
 //   var currentUrl = function()
 //   {
-//   	try
-//   	{
+//    try
+//    {
 //       console.log('take the plunge');
 //       chrome.tabs.query({currentWindow: true, active: true}, function(tabs)
 //       {
@@ -16,20 +17,20 @@
 //         console.log("URL : " + window.CURRENT_URL)
 //         checkIfUrlAlreadySaved();
 //       });
-//   	}
-//   	catch (err)
-//   	{
-//   		if(err.name == 'TypeError')
-//   	  {
-//   	    window.CURRENT_URL = document.URL;
+//    }
+//    catch (err)
+//    {
+//      if(err.name == 'TypeError')
+//      {
+//        window.CURRENT_URL = document.URL;
 //         console.log('URL :: ' + window.CURRENT_URL)
 //         checkIfUrlAlreadySaved()
 //       }
-//   	  else
-//   	  {
-//   	  	document.log("Didnt see Type Error")
+//      else
+//      {
+//        document.log("Didnt see Type Error")
 //         console.log('URL :!: ' + window.CURRENT_URL)
-//   	    throw "currentUrl() couldn't find browser page url"
+//        throw "currentUrl() couldn't find browser page url"
 //       }
 //     }
 //   }
@@ -337,7 +338,7 @@
 //       });
 //   };
 
-// 	currentUrl();
+//  currentUrl();
 // });
 
 
@@ -352,3 +353,6 @@
 // //   });
 // // });
 
+
+
+});

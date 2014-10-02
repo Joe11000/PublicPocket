@@ -1,8 +1,5 @@
 CorsTest::Application.routes.draw do
 
-  get "chrome_extensions/get_page"
-  resources :sits
-
   get '/sites/has_url_saved', to: 'sites#has_url_saved'
   # post '/sites/:id/delete' => 'sites#destroy'
   # post '/sites/:id/update' => 'sites#update'
@@ -13,7 +10,5 @@ CorsTest::Application.routes.draw do
 
   root 'sites#index'
 
-
-  get '/chrome_extension/:url', to: "chrome_extensions#get_saved_or_unsaved_page"
-
+  get 'chrome_extension/:url', to: "chrome_extensions#get_saved_or_unsaved_site_page"
 end
