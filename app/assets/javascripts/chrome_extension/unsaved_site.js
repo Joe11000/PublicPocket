@@ -1,8 +1,8 @@
 $(function(){
-  alert('chrome js loaded'); //delete this line
+  alert('Unsaved Site'); //delete this line
 
-  // var HOST = "http://localhost:3000/"
-  var HOST = "http://cors-test-101.herokuapp.com/"
+  var HOST = "http://localhost:3000/"
+  // var HOST = "http://cors-test-101.herokuapp.com/"
 
 //  var GO_TO_SITE_LINK = "<a href='" + HOST + "sites/'>Go To Site</a>";
 
